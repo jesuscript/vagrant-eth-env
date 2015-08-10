@@ -7,5 +7,7 @@ Ansible: http://docs.ansible.com/ansible/intro_installation.html
 
 ## Usage:
 
-`vagrant up`
-`vagrant ssh`
+``` bash
+vagrant up
+vagrant ssh
+```
