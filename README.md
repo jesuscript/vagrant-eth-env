@@ -1,5 +1,7 @@
 # Vagrant/Ansible virtual box configs for dapp development
 
+Ubuntu 14.04 with nodejs, geth, pyethereum, ethertdd.py and embark
+
 ## Dependencies
 
 * Vagrant: http://docs.vagrantup.com/v2/installation/
