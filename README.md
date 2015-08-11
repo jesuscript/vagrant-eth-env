@@ -26,3 +26,6 @@ vagrant suspend # stop the guest machine
 vagrant resume # resume from the point where the machine was last suspended
 ```
 
+## Note
+
+Make sure to set `--rpchost` and your dapp's host to `0.0.0.0` in order to access them on your host sytsm. In embark that's `rpc_host: 0.0.0.0` in `blockchain.yml` and `host: 0.0.0.0` in `server.yml`.
