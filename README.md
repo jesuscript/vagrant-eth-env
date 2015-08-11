@@ -2,12 +2,12 @@
 
 ## Dependencies
 
-Vagrant: http://docs.vagrantup.com/v2/installation/
-Ansible: http://docs.ansible.com/ansible/intro_installation.html
+* Vagrant: http://docs.vagrantup.com/v2/installation/
+* Ansible: http://docs.ansible.com/ansible/intro_installation.html
 
 ## Usage:
 
-``` bash
-vagrant up
-vagrant ssh
+```bash
+vagrant up dapps
+vagrant ssh dapps
 ```
