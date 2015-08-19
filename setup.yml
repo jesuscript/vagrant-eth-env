@@ -16,22 +16,22 @@
         - make
         - g++
         - build-essential
-    - name: add node.js repository
+    - name: add PPAs
       apt_repository: repo={{item}}
       with_items:
-        - 'ppa:chris-lea/node.js'
         - 'ppa:ethereum/ethereum'
         - 'ppa:ethereum/ethereum-dev'
         - 'ppa:ethereum/ethereum-qt'
-        - 'ppa:ethereum/ethereum'
-        - 'ppa:ethereum/ethereum-dev'
+    - name: add io.js v2.x PPA
+      shell: curl -sL https://deb.nodesource.com/setup_iojs_2.x | sudo -E bash -
     - name: install deps
       apt: state=present update_cache=yes pkg={{item}}
       with_items:
-        - nodejs
+        - iojs
         - python
         - solc
         - ethereum
+        - cpp-ethereum
     - name: install npm globals
       npm: state=present global=yes name={{ item }}
       sudo: yes
