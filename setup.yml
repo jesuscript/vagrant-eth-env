@@ -1,57 +1,9 @@
-- hosts: pyeth
+- hosts: eth
   sudo: yes
   tasks:
     - name: update software
-      apt: update_cache=yes upgrade=yes
+      apt: update_cache=yes
       sudo: yes
-    - name: install prereqs
-      apt: state=present pkg={{ item }}
-      sudo: yes
-      with_items:
-        - python-software-properties
-        - python-setuptools
-        - python-dev
-        - software-properties-common
-        - git
-        - make
-        - g++
-        - build-essential
-    - name: add PPAs
-      apt_repository: repo={{item}}
-      with_items:
-        - 'ppa:ethereum/ethereum'
-        - 'ppa:ethereum/ethereum-dev'
-        - 'ppa:ethereum/ethereum-qt'
-    - name: add io.js v2.x PPA
-      shell: curl -sL https://deb.nodesource.com/setup_iojs_2.x | sudo -E bash -
-    - name: install deps
-      apt: state=present update_cache=yes pkg={{item}}
-      with_items:
-        - iojs
-        - python
-        - solc
-        - ethereum
-        - cpp-ethereum
-    - name: install npm globals
-      npm: state=present global=yes name={{ item }}
-      sudo: yes
-      with_items:
-        - grunt-cli
-        - gulp
-        - embark-framework
-        - jasmine
-        - mocha
-    - name: clone git repositories
-      git: repo='https://github.com/{{item.user}}/{{item.project}}' dest="/home/vagrant/{{item.project}}" accept_hostkey=yes
-      with_items:
-        - { user: 'ethermarket', project: 'ethertdd.py' }
-        - { user: 'ethereum', project: 'pyethereum' }
-    - name: install python dependencies
-      shell: python setup.py install chdir='/home/vagrant/{{item}}'
-      sudo: yes
-      with_items:
-        - 'ethertdd.py'
-        - 'pyethereum'
       
 
     
