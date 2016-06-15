@@ -13,7 +13,8 @@ A **real environment**-friendly, **virtual environment** for development on Ethe
 
 ## Dependencies
 
-* [Vagrant](http://docs.vagrantup.com/v2/installation/)
+* [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* [Vagrant](http://docs.vagrantup.com/v2/installation/) (1.7.4 or later)
 * nfsd (pre-installed on OS X, typically a simple package install on Linux)
 
 ## Usage:
