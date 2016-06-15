@@ -1,31 +1,30 @@
-# Vagrant/Ansible virtual box configs for dapp development
+# Vagrant-Ethereum Box
+A *real environment*-friendly *virtual environment* for development on Ethereum
 
-Ubuntu 14.04 with
-* [geth](https://github.com/ethereum/go-ethereum)
-* [pyethereum](https://github.com/ethereum/pyethereum)
-* [embark](https://github.com/iurimatias/embark-framework)
+* Want a (real) Ethereum node running locally on your machine for development?
+* Want sub-second block times?
+* Don't like it when your laptop roars like it's about to take off and becomes so hot, you can literally make breakfast on it?
+* Like trees, polar bears, squirrels and those weird tiny monkeys living in Amazon forests?
 
-Creates a synced `DAPPS` directory in the host's and guest's home directories. Any files and directories created inside the synced directory are shared between your virtual and host environments.
 
-The system is fully configured for you to run geth and use Embark with full support for tests.
-
-You can start building Dapps right now.
+... then stop ~being a dick~ mining in dev and use this Box.
 
 ## Dependencies
 
 * [Vagrant](http://docs.vagrantup.com/v2/installation/)
-* [Ansible](http://docs.ansible.com/ansible/intro_installation.html)
 * nfsd (pre-installed on OS X, typically a simple package install on Linux)
 
 ## Usage:
 
-```bash
-vagrant up # initialises the box. may take some time
-vagrant ssh # ssh into the box
-vagrant suspend # stop the guest machine
-vagrant resume # resume from the point where the machine was last suspended
-```
+`vagrant up` from wherever you cloned this, wait, then RPC the shit out of `http://localhost:8545`.
 
-## Note
+## How does this work?
 
-Make sure to set `--rpchost` and your dapp's host to `0.0.0.0` in order to access them on your host sytsm. In embark that's `rpc_host: 0.0.0.0` in `blockchain.yml` and `host: 0.0.0.0` in `server.yml`.
+Do you really give a shit?
+
+* YES! https://github.com/ethcore/parity/wiki/Proof-of-Authority-Chains
+* NO! https://www.youtube.com/watch?v=5uUuRD_atfI
+
+### Still not convinced you need this?
+
+# Just LOOK AT THE MONKEY

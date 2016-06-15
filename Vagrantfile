@@ -1,12 +1,11 @@
 Vagrant.configure("2") do |config|
-  config.vm.define "eth" do |eth|
-    eth.vm.box = "ubuntu/trusty64"
-    eth.vm.synced_folder "~/CODE", "/home/vagrant/CODE", nfs: true
-    eth.vm.network "private_network", type: "dhcp"
-    eth.vm.network :forwarded_port, guest: 8545, host: 8545
-    eth.vm.network :forwarded_port, guest: 30303, host: 30303, protocol: "udp"
+  config.vm.define "ethereum" do |ethereum|
+    ethereum.vm.box = "ubuntu/trusty64"
+    ethereum.vm.network "private_network", type: "dhcp"
+    ethereum.vm.network :forwarded_port, guest: 8545, host: 8545
+    ethereum.vm.network :forwarded_port, guest: 30303, host: 30303, protocol: "udp"
     
-    eth.vm.provider "virtualbox" do |v|
+    ethereum.vm.provider "virtualbox" do |v|
       host = RbConfig::CONFIG['host_os']
 
       # Give VM 1/4 system memory & access to all cpu cores on the host
@@ -26,5 +25,9 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--memory", mem]
       v.customize ["modifyvm", :id, "--cpus", cpus]
     end
+
+    ethereum.vm.provision "shell", path: "configure-parity.sh"
   end
 end
+
+
