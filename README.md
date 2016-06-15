@@ -1,5 +1,5 @@
 # Vagrant-Ethereum Box
-A *real environment*-friendly *virtual environment* for development on Ethereum
+A **real environment**-friendly, **virtual environment** for development on Ethereum
 
 * Want a (real) Ethereum node running locally on your machine for development?
 * Want sub-second block times?
@@ -7,7 +7,9 @@ A *real environment*-friendly *virtual environment* for development on Ethereum
 * Like trees, polar bears, squirrels and those weird tiny monkeys living in Amazon forests?
 
 
-... then stop ~being a dick~ mining in dev and use this Box.
+![](https://raw.githubusercontent.com/jesuscript/vagrant-eth-env/master/pygmy-marmoset-1.jpg)
+
+... then stop ~~being a dick~~ mining in dev and use this Box.
 
 ## Dependencies
 
@@ -25,6 +27,6 @@ Do you really give a shit?
 * YES! https://github.com/ethcore/parity/wiki/Proof-of-Authority-Chains
 * NO! https://www.youtube.com/watch?v=5uUuRD_atfI
 
-### Still not convinced you need this?
+## Still not convinced you need this? **LOOK AT THE MONKEY**
 
-# Just LOOK AT THE MONKEY
+![](https://raw.githubusercontent.com/jesuscript/vagrant-eth-env/master/pygmy-marmoset-2.jpg)
