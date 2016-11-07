@@ -10,7 +10,7 @@ echo "user: $(whoami)"
 echo "Installing parity"
 
 sudo apt-get update -qq
-sudo apt-get install -y -qq curl expect expect-dev
+sudo apt-get install -y -qq curl expect expect-dev jq
 
 ##################
 # install parity #
@@ -38,8 +38,7 @@ interact
 
 echo $expect_out
 
-address=0x$(parity account list | awk 'END{print}' | tr -cd '[[:alnum:]]._-')
-
+address=0x$(cat $HOME/.parity/keys/*| jq '.address' -r)
 echo "address: $address"
 
 cat > $HOME/chain.json <<EOL
