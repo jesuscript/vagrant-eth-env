@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PARITY_DEB_URL=http://d1h4xl4cr1h0mo.cloudfront.net/beta/x86_64-unknown-linux-gnu/parity_1.4.0_amd64.deb
-PASSWORD=password
+PASSWORD=Password123
 export HOME="/root"
 
 echo "home: $HOME"
@@ -10,7 +10,7 @@ echo "user: $(whoami)"
 echo "Installing parity"
 
 sudo apt-get update -qq
-sudo apt-get install -y -qq curl expect expect-dev
+sudo apt-get install -y -qq curl
 
 ##################
 # install parity #
@@ -24,25 +24,18 @@ rm $file
 #####################
 # create an account #
 #####################
-echo $PASSWORD > $HOME/.parity-pass
+mkdir -p .parity/keys
 
-expect_out= expect -c "
-spawn sudo parity account new
-puts $HOME
-expect \"Type password: \"
-send ${PASSWORD}\n
-expect \"Repeat password: \"
-send ${PASSWORD}\n
-interact
-"
+cat > .parity/keys/key.json <<EOL
+{"id":"0c9ad7b3-cc85-f81a-7991-05695a5495ad","version":3,"crypto":{"cipher":"aes-128-ctr","cipherparams":{"iv":"ce9b7b9741796b46c2ed494850781544"},"ciphertext":"86ff7819eeb9a7ccddbe781476b3d0268bdf6754d8253d3a523a208164197273","kdf":"pbkdf2","kdfparams":{"c":10240,"dklen":32,"prf":"hmac-sha256","salt":"9df3dfd806b5b4f95eaea6a4457ba806ae33c9cea5d55037029e83a6830ea278"},"mac":"3ff7df7e97bbbf845e7c5962e1522a1040319eb1fe4c510ff182b39e2cfa4309"},"address":"133e5245e3e5ab3f65e73120b34cc29f0f7ba504","name":"0c9ad7b3-cc85-f81a-7991-05695a5495ad","meta":"{}"}
+EOL
 
-echo $expect_out
+echo $PASSWORD >> .parity-pass
 
-address=0x$(parity account list | awk 'END{print}' | tr -cd '[[:alnum:]]._-')
-
+address="133e5245e3e5ab3f65e73120b34cc29f0f7ba504"
 echo "address: $address"
 
-cat > $HOME/chain.json <<EOL
+cat > chain.json <<EOL
 {
   "name": "Private",
   "engine": {
@@ -82,7 +75,5 @@ cat > $HOME/chain.json <<EOL
 }
 EOL
 
-command="parity --chain $HOME/chain.json --author ${address} --unlock ${address} --password $HOME/.parity-pass --rpccorsdomain \"*\" --jsonrpc-interface all >&1 1>>/var/log/parity.log 2>&1 &"
-
-parity daemon parity.pid --chain $HOME/chain.json --author ${address} --unlock ${address} --password $HOME/.parity-pass --rpccorsdomain "*" --jsonrpc-interface all --jsonrpc-hosts all --no-dapps --no-signer
+parity --chain chain.json --author ${address} --unlock ${address} --password .parity-pass --rpccorsdomain "*" --jsonrpc-interface all --jsonrpc-hosts all --no-dapps --no-signer >&1 1>>parity.log 2>&1 &
 
