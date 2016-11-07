@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PARITY_DEB_URL=https://vanity-service.ethcore.io/github-data/latest-parity-deb
+PARITY_DEB_URL=http://d1h4xl4cr1h0mo.cloudfront.net/beta/x86_64-unknown-linux-gnu/parity_1.4.0_amd64.deb
 PASSWORD=password
 export HOME="/root"
 
@@ -46,13 +46,7 @@ cat > $HOME/chain.json <<EOL
 {
   "name": "Private",
   "engine": {
-    "BasicAuthority": {
-      "params": {
-        "gasLimitBoundDivisor": "0x0400",
-        "durationLimit": "0x0d",
-        "authorities" : ["${address}"]
-      }
-    }
+    "InstantSeal": null
   },
   "params": {
     "accountStartNonce": "0x00",
@@ -62,9 +56,9 @@ cat > $HOME/chain.json <<EOL
   },
   "genesis": {
     "seal": {
-      "generic": {
-        "fields": 1,
-        "rlp": "0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa"
+      "ethereum": {
+        "nonce": "0x00006d6f7264656e",
+        "mixHash": "0x00000000000000000000000000000000000000647572616c65787365646c6578"
       }
     },
     "difficulty": "0x20000",
@@ -72,7 +66,7 @@ cat > $HOME/chain.json <<EOL
     "timestamp": "0x00",
     "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
     "extraData": "0x",
-    "gasLimit": "0x2fefd8"
+    "gasLimit": "0x1312d00"
   },
   "nodes": [
   ],
@@ -90,10 +84,5 @@ EOL
 
 command="parity --chain $HOME/chain.json --author ${address} --unlock ${address} --password $HOME/.parity-pass --rpccorsdomain \"*\" --jsonrpc-interface all >&1 1>>/var/log/parity.log 2>&1 &"
 
-printf "%s\n%s" "#!/bin/sh" "$command" | sudo tee /etc/init.d/parity
-
-sudo chmod +x /etc/init.d/parity
-sudo update-rc.d parity defaults
-
-sudo service parity start
+parity daemon parity.pid --chain $HOME/chain.json --author ${address} --unlock ${address} --password $HOME/.parity-pass --rpccorsdomain "*" --jsonrpc-interface all --jsonrpc-hosts all --no-dapps --no-signer
 

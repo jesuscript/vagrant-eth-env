@@ -23,7 +23,7 @@ A **real environment**-friendly, **virtual environment** for development on Ethe
 
 ## How does this work?
 
-Do you really give a shit?
+Do you really give a monkey's?
 
 * YES! https://github.com/ethcore/parity/wiki/Proof-of-Authority-Chains
 * NO! https://www.youtube.com/watch?v=5uUuRD_atfI

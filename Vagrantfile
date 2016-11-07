@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   config.vm.define "ethereum" do |ethereum|
-    ethereum.vm.box = "ubuntu/trusty64"
+    ethereum.vm.box = "ubuntu/xenial64"
     ethereum.vm.network "private_network", type: "dhcp"
     ethereum.vm.network :forwarded_port, guest: 8545, host: 8545
     ethereum.vm.network :forwarded_port, guest: 30303, host: 30303, protocol: "udp"
